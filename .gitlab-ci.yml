@@ -1,7 +1,26 @@
 stages:
-  - test
+  - build
+  - deploy
 
-test_job:
-  stage: test
-  script:
-    - echo "Hello, World!"
+variables:
+  AZURE_STATIC_WEB_APPS_API_TOKEN: $AZURE_STATIC_WEB_APPS_API_TOKEN
+
+build:
+  stage: build
+  image: node:14
+  script: 
+  - npm install
+  - npm run build
+  artifacts:
+    paths:
+      - public
+
+deploy:
+  stage: deploy
+  image: mcr.microsoft.com/appsvc/staticappsclient:stable
+  script: 
+    - |
+      echo "Deploying to Azure Static Web Apps..."
+      npx swa deploy ./public --api-location ./api --env production --deployment-token $AZURE_STATIC_WEB_APPS_API_TOKEN
+  only:
+    - main
