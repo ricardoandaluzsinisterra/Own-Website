@@ -10,7 +10,7 @@ before_script:
 
 deploy:
   stage: deploy
-  image: node:16
+  image: node:18
   script: 
     - echo "Installing Azure Static Web Apps CLI..."
     - npm install -g @azure/static-web-apps-cli --unsafe-perm
