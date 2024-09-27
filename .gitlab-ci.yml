@@ -1,5 +1,4 @@
 stages:
-  - build
   - deploy
 
 variables:
@@ -9,24 +8,11 @@ before_script:
   - echo "Checking out the repository..."
   - git checkout $CI_COMMIT_REF_NAME
 
-build:
-  stage: build
-  image: node:14
-  script: 
-    - echo "Installing dependencies..."
-    - npm install
-    - echo "Building the project..."
-    - npm run build
-  artifacts:
-    paths:
-      - public
-
 deploy:
   stage: deploy
   image: mcr.microsoft.com/appsvc/staticappsclient:stable
   script: 
     - echo "Deploying to Azure Static Web Apps..."
-    - npm install -g @azure/static-web-apps-cli
-    - npx swa deploy ./public --api-location ./api --env production --deployment-token $AZURE_STATIC_WEB_APPS_API_TOKEN
+    - npx swa deploy ./ --api-location ./api --env production --deployment-token $AZURE_STATIC_WEB_APPS_API_TOKEN
   only:
     - main
