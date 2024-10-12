@@ -8,14 +8,14 @@ html, body {
 }
 
 .header {
-    background-color: #34495E; /* Lighter matte navy shade */
-    height: 21%; /* Adjust height as needed */
-    width: 100%; /* Full width */
+    background-color: #34495E; 
+    height: 18%; 
+    width: 100%; 
     color: white;
     font-size: 45px;
     text-align: center;
     padding-top: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* More noticeable Apple-like shadow */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
 }
 
 #links {
@@ -34,4 +34,44 @@ html, body {
 
 a {
     color: white;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.block {
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    background-color: #f0f0f0; 
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    width: 1400px;
+    height: 500px; /* Consistent height */
+}
+
+.block:nth-of-type(1) {
+    transform: translateX(0); 
+}
+
+.block:nth-of-type(2) {
+    transform: translateX(100px); 
+}
+
+.block:nth-of-type(3) {
+    transform: translateX(-100px); 
+}
+
+.block:nth-of-type(4) {
+    transform: translateX(100px);
+}
+
+.block.visible {
+    opacity: 1;
+    transform: translateX(0);
 }
