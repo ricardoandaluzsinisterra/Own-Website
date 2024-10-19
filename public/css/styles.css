@@ -1,3 +1,4 @@
+/* General styles for desktop */
 html, body {
     margin: 0;
     padding: 0;
@@ -5,7 +6,7 @@ html, body {
     height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background-color: grey;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .header {
@@ -54,48 +55,27 @@ a {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
     width: 95%; /* More flexible width */
     max-width: 1200px; /* Limit the container size for large screens */
-    height: auto;
+    height: auto; /* Remove fixed height for flexibility */
     position: relative;
-}
-
-#block1::before {
-    content: "Highlighted";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(255, 235, 59, 0.5); 
-    color: #fbc02d; 
-    text-align: center;
-    padding: 5px 0;
-    font-size: 1em;
-    font-weight: bold;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
 }
 
 .block-content {
     display: flex;
-    flex-direction: column; /* Stack content vertically by default */
+    flex-direction: row; /* Default side-by-side for large screens */
     align-items: center;
     width: 100%;
 }
 
 .block-image {
-    width: 100%; /* Full width for smaller screens */
+    width: 35%; /* Default smaller image for large screens */
     height: auto;
-    max-width: 600px; /* Limit image width on large screens */
-    margin-bottom: 20px;
+    margin-right: 20px;
     border-radius: 8px;
 }
 
 .block-text {
-    width: 100%;
+    flex: 1;
     text-align: justify;
-}
-
-.block-text a {
-    color: black; 
 }
 
 .block-title {
@@ -104,22 +84,43 @@ a {
 }
 
 /* MEDIA QUERIES FOR RESPONSIVENESS */
-@media (min-width: 1024px) {
+
+/* For tablets and smaller desktop screens */
+@media (max-width: 1024px) {
     .block-content {
-        flex-direction: row; /* Side by side layout on larger screens */
-        align-items: flex-start;
+        flex-direction: column; /* Stack vertically on smaller screens */
+        align-items: center;
     }
 
     .block-image {
-        width: 35%; /* Smaller image on large screens */
-        margin-right: 20px;
+        width: 100%; /* Full width for images */
+        margin: 10px 0; /* Add space between image and text */
+    }
+
+    .block-text {
+        width: 100%; /* Ensure block text takes full width */
+        padding: 10px; /* Add some padding for better readability */
+    }
+
+    .header {
+        font-size: 32px; /* Adjust header size */
+        padding-top: 10px;
+    }
+
+    #links {
+        font-size: 16px;
+    }
+
+    .block-title {
+        font-size: 26px;
     }
 }
 
+/* For mobile phones */
 @media (max-width: 768px) {
     .header {
-        font-size: 28px; 
-        padding-top: 10px;
+        font-size: 24px; /* Reduce header size */
+        padding: 10px 0; /* Smaller padding */
     }
 
     .block {
@@ -127,48 +128,58 @@ a {
         margin: 10px 0;
     }
 
+    .block-content {
+        flex-direction: column; /* Ensure vertical stacking */
+    }
+
     .block-image {
-        width: 90%; /* Images should not take more than 90% of screen width */
-        margin-bottom: 20px;
+        width: 100%; /* Full width images on small screens */
+        margin-bottom: 10px;
     }
 
     .block-title {
-        font-size: 22px;
+        font-size: 22px; /* Smaller block titles */
     }
 
     .block-text {
-        font-size: 14px;
+        font-size: 14px; /* Smaller text for readability */
+        padding: 10px;
     }
 
     #links {
-        font-size: 14px;
+        font-size: 14px; /* Smaller links */
     }
 }
 
+/* For very small phones */
 @media (max-width: 480px) {
     .header {
-        font-size: 24px; 
-        padding-top: 10px;
+        font-size: 20px; /* Even smaller header */
+        padding: 10px;
     }
 
     .block {
         padding: 10px;
     }
 
+    .block-content {
+        flex-direction: column; /* Stack elements */
+    }
+
     .block-image {
-        width: 100%; 
+        width: 100%; /* Full width images on very small screens */
         margin-bottom: 15px;
     }
 
     .block-title {
-        font-size: 18px; 
+        font-size: 18px; /* Even smaller block titles */
     }
 
     .block-text {
-        font-size: 12px; 
+        font-size: 12px; /* Adjust text size to fit smaller screens */
     }
 
     #links {
-        font-size: 12px;
+        font-size: 12px; /* Adjust link size */
     }
 }
