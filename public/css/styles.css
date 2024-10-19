@@ -130,3 +130,28 @@ a {
     opacity: 1;
     transform: translateX(0);
 }
+
+/* Media Queries for Responsive Design */
+@media (min-width: 600px) {
+    .header {
+        font-size: 42px;
+    }
+
+    #links {
+        font-size: 18px;
+    }
+
+    .block-content {
+        flex-direction: row;
+    }
+
+    .block-image {
+        width: 30%;
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+
+    .block-title {
+        font-size: 30px;
+    }
+}
