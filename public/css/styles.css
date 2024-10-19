@@ -16,7 +16,6 @@ html, body {
     text-align: center;
     padding-top: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
-    
 }
 
 #links {
@@ -52,8 +51,9 @@ a {
     margin: 20px 0;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
-    width: 1400px;
-    height: 500px; /* Consistent height */
+    width: 90%; /* Make width flexible */
+    max-width: 1400px;
+    height: auto;
     position: relative; /* For positioning the ribbon */
 }
 
@@ -76,6 +76,7 @@ a {
 .block-content {
     display: flex;
     align-items: center;
+    flex-wrap: wrap; /* Allow elements to wrap */
 }
 
 .block-image {
@@ -87,7 +88,7 @@ a {
 
 .block-text {
     flex: 1;
-    text-align:justify;
+    text-align: justify;
 }
 
 .block-text a {
@@ -131,27 +132,78 @@ a {
     transform: translateX(0);
 }
 
-/* Media Queries for Responsive Design */
-@media (min-width: 600px) {
-    .header {
-        font-size: 42px;
-    }
-
-    #links {
-        font-size: 18px;
-    }
-
+/* MEDIA QUERIES FOR RESPONSIVENESS */
+@media (max-width: 1024px) {
     .block-content {
-        flex-direction: row;
+        flex-direction: column; /* Stack content vertically */
+        align-items: center;
     }
 
     .block-image {
-        width: 30%;
-        margin-right: 20px;
-        margin-bottom: 0;
+        width: 70%; /* Make images smaller */
+        margin-bottom: 20px;
+    }
+
+    .header {
+        font-size: 32px; /* Reduce header size */
+        padding-top: 15px;
+    }
+
+    #links {
+        font-size: 16px;
     }
 
     .block-title {
-        font-size: 30px;
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        font-size: 28px; /* Further reduce header size */
+    }
+
+    .block {
+        padding: 15px; /* Reduce padding */
+        margin: 10px 0;
+    }
+
+    .block-image {
+        width: 100%; /* Make image take full width */
+    }
+
+    .block-title {
+        font-size: 22px;
+    }
+
+    .block-text {
+        font-size: 14px; /* Reduce text size */
+    }
+
+    #links {
+        font-size: 14px; /* Smaller link size */
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        font-size: 24px; /* Even smaller header */
+        padding-top: 10px;
+    }
+
+    .block {
+        padding: 10px;
+    }
+
+    .block-image {
+        width: 100%; /* Full width images on small screens */
+    }
+
+    .block-title {
+        font-size: 18px; /* Smaller titles */
+    }
+
+    .block-text {
+        font-size: 12px; /* Smaller text */
     }
 }
