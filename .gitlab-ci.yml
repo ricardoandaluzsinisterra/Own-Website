@@ -4,10 +4,6 @@ stages:
 variables:
   AZURE_STATIC_WEB_APPS_API_TOKEN: $AZURE_STATIC_WEB_APPS_API_TOKEN
 
-before_script:
-  - echo "Checking out the repository..."
-  - git checkout $CI_COMMIT_REF_NAME
-
 deploy:
   stage: deploy
   image: node:18
