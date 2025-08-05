@@ -5,19 +5,23 @@ html, body {
     width: 100%;
     height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background-color: grey;
+    background-color: #2a2a2a; /* Softer dark grey instead of pure black */
     overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .header {
-    background-color: #34495E; 
-    height: 18%; 
+    background-color: #e8e8e8; 
+    min-height: 120px; 
     width: 100%; 
-    color: white;
+    color: black;
     font-size: 42px;
     text-align: center;
-    padding-top: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
+    padding: 20px 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #links {
@@ -29,13 +33,24 @@ html, body {
     display: inline-block;
     width: 1px;
     height: 20px;
-    background-color: white;
+    background-color: black;
     margin: 0 10px;
     vertical-align: middle;
 }
 
-a {
-    color: white;
+/* Header links - black on white background */
+.header a {
+    color: black;
+}
+
+/* Content links - dark color for readability on light background */
+.block a {
+    color: #0066cc;
+    text-decoration: underline;
+}
+
+.block a:hover {
+    color: #004499;
 }
 
 .container {
@@ -46,8 +61,7 @@ a {
 }
 
 .block {
-    opacity: 0;
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    opacity: 1; /* Always visible */
     background-color: #f0f0f0; 
     padding: 20px;
     margin: 20px 0;
@@ -68,7 +82,8 @@ a {
 
 .block-image {
     width: 35%; /* Default smaller image for large screens */
-    height: auto;
+    height: 350px; /* Increased height for desktop */
+    object-fit: cover; /* Maintain aspect ratio and crop if needed */
     margin-right: 20px;
     border-radius: 8px;
 }
@@ -94,6 +109,7 @@ a {
 
     .block-image {
         width: 100%; /* Full width for images */
+        height: 280px; /* Increased height for tablets */
         margin: 10px 0; /* Add space between image and text */
     }
 
@@ -120,12 +136,14 @@ a {
 @media (max-width: 768px) {
     .header {
         font-size: 24px; /* Reduce header size */
-        padding: 10px 0; /* Smaller padding */
+        padding: 15px 10px; /* Better padding */
+        min-height: 100px;
     }
 
     .block {
         padding: 15px;
-        margin: 10px 0;
+        margin: 10px 5px;
+        width: 90%;
     }
 
     .block-content {
@@ -134,7 +152,9 @@ a {
 
     .block-image {
         width: 100%; /* Full width images on small screens */
-        margin-bottom: 10px;
+        height: 240px; /* Increased height for mobile phones */
+        margin-bottom: 15px;
+        margin-right: 0;
     }
 
     .block-title {
@@ -143,11 +163,20 @@ a {
 
     .block-text {
         font-size: 14px; /* Smaller text for readability */
-        padding: 10px;
+        padding: 5px;
+        text-align: left;
     }
 
     #links {
         font-size: 14px; /* Smaller links */
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .separator {
+        display: none; /* Hide separators on mobile */
     }
 }
 
@@ -168,6 +197,7 @@ a {
 
     .block-image {
         width: 100%; /* Full width images on very small screens */
+        height: 200px; /* Increased height for very small phones */
         margin-bottom: 15px;
     }
 
