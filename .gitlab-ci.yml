@@ -1,8 +1,21 @@
 stages:
+  - sync
   - deploy
 
 variables:
   AZURE_STATIC_WEB_APPS_API_TOKEN: $AZURE_STATIC_WEB_APPS_API_TOKEN
+
+sync:
+  stage: sync
+  image: alpine/git:latest
+  script:
+    - echo "Synchronizing repository..."
+    - git fetch origin
+    - git status
+    - echo "Repository is up to date"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: always
 
 deploy:
   stage: deploy
