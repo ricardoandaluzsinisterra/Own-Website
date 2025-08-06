@@ -38,8 +38,8 @@ deploy:
     - ls -la public/
     - 'if [ -f "public/css/styles.css" ]; then echo "✓ CSS file present ($(wc -l < public/css/styles.css) lines)"; else echo "✗ CSS file missing!"; exit 1; fi'
   script: 
-    - echo "Installing Azure Static Web Apps CLI..."
-    - npm install -g @azure/static-web-apps-cli
+    - echo "Installing Azure Static Web Apps CLI locally..."
+    - npm install @azure/static-web-apps-cli
     - echo "Deploying to Azure Static Web Apps..."
     - npx swa deploy ./public --env production --deployment-token $AZURE_STATIC_WEB_APPS_API_TOKEN --verbose
     - echo "Deployment completed"
