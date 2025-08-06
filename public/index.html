@@ -1,101 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <title>Ricardo Andaluz</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="header">
-        Ricardo Andaluz Sinisterra
-        <p id="links">
-            <a href="https://www.linkedin.com/in/ricardo-andaluz-sinisterra-038a972ab/">LinkedIn</a>
-            <span class="separator"></span>
-            <a href="https://gitlab.com/D00262961">GitLab</a>
-            <span class="separator"></span>
-            <a href="mailto:ricardo@andaluz.uk">ricardo@andaluz.uk</a>
-        </p>
+      <h1>Ricardo Andaluz Sinisterra</h1>
+      <div id="links">
+        <a
+          href="https://www.linkedin.com/in/ricardo-andaluz-sinisterra-038a972ab/"
+          >LinkedIn</a
+        >
+        <span class="separator"></span>
+        <a href="https://gitlab.com/D00262961">GitLab</a>
+        <span class="separator"></span>
+        <a href="mailto:ricardo@andaluz.uk">ricardo@andaluz.uk</a>
+      </div>
     </div>
     <div class="container">
         <div id="block1" class="block">
+            <div class="highlighted-ribbon">Highlighted</div>
+        <div class="block-content">
+          <img
+            src="css/images/screenshot-of-repo.png"
+            alt="Repo screenshot"
+            class="block-image"
+          />
+          <div class="block-text">
+            <p class="block-title">DevOps Project</p>
+            <p>
+              During the current semester of my course, we, as a group,
+              developed and deployed an IoT environment centered around
+              scanners. These scanners communicated with an MQTT broker, which
+              interfaced with a custom Pub/Sub system we built using Python. The
+              data was then transmitted through Apache Kafka to Prometheus for
+              metrics storage and monitoring, and subsequently visualized using
+              Grafana.
+            </p>
+            <p>
+              For the first release, we utilized KinD (Kubernetes in Docker) to
+              create virtual machines for both test and staging environments,
+              allowing us to simulate real-world deployment scenarios. To ensure
+              high availability (HA), we implemented StatefulSets, providing
+              resilience and stability to our services. Additionally, we set up
+              a CI/CD pipeline using Argo CD, automating the deployment process
+              from development to production, ensuring efficient and reliable
+              delivery of new updates.
+            </p>
+            <p>
+              In addition to the technical implementation, we used Jira for
+              project management, where we tracked tasks, progress, and sprints
+              to ensure smooth development. For documentation, we leveraged
+              Confluence to maintain detailed records of system architecture,
+              design decisions, and deployment processes. Communication within
+              the team was facilitated through Slack, allowing for quick
+              updates, collaboration, and issue resolution in real time.
+            </p>
+            <p>
+              You can find the link for our GitLab repo
+              <a href="https://gitlab.comp.dkit.ie/D00256764/iot_proj">here</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="linkedin-block" class="block">
             <div class="block-content">
-                <img src="css/images/screenshot-of-repo.png" alt="Repo screenshot" class="block-image">
-                <div class="block-text">
-                    <p class="block-title">DevOps Project</p>
-                    <p>During the current semester of my course, we, as a group, developed and deployed an IoT 
-                        environment centered around scanners. These scanners communicated with an MQTT broker, 
-                        which interfaced with a custom Pub/Sub system we built using Python. The data was then transmitted through 
-                        Apache Kafka to Prometheus for metrics storage and monitoring, and subsequently visualized using Grafana.
-                    </p>
-                    <p>
-                        For the first release, we utilized KinD (Kubernetes in Docker) to create virtual machines for both test and 
-                        staging environments, allowing us to simulate real-world deployment scenarios. To ensure high availability (HA), 
-                        we implemented StatefulSets, providing resilience and stability to our services. Additionally, we set up a CI/CD 
-                        pipeline using Argo CD, automating the deployment process from development to production, ensuring efficient and 
-                        reliable delivery of new updates.
-                    </p>
-                    <p>
-                        In addition to the technical implementation, we used Jira for project management, where we tracked tasks, progress, 
-                        and sprints to ensure smooth development. For documentation, we leveraged Confluence to maintain detailed records of 
-                        system architecture, design decisions, and deployment processes. Communication within the team was facilitated through 
-                        Slack, allowing for quick updates, collaboration, and issue resolution in real time.
-                    </p>
-                    <p>
-                        You can find the link for our GitLab repo <a href="https://gitlab.comp.dkit.ie/D00256764/iot_proj">here</a>.
-                    </p>
+                <div class="block-text" style="width: 100%;">
+                    <p class="block-title">Latest Update</p>
+                    <div class="linkedin-post-card">
+                        <div class="post-header">
+                            <div class="profile-info">
+                                <div class="profile-details">
+                                    <h3>Ricardo Andaluz Sinisterra</h3>
+                                    <p>Software Engineering Intern at Microsoft Ireland</p>
+                                    <span class="post-time">Recent post</span>
+                                </div>
+                            </div>
+                            <div class="linkedin-logo">
+                                <span>in</span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <p><strong>🏆 WE WON! BEST HACK at Microsoft Ireland Intern FHL!</strong></p>
+                            <p>What an incredible journey! Our team just claimed the top prize at the Microsoft Ireland Intern FHL hackathon with <strong>MSocial</strong> - an AI-powered agent that revolutionizes team morale planning.</p>
+                            <p>MSocial transforms morale planning from a manual chore into a seamless, inclusive, and data-informed process, helping teams stay connected without burning out their organizers.</p>
+                            <div class="hashtags">
+                                <span>#FHL2025</span> <span>#MicrosoftLife</span> <span>#Hackathon</span> <span>#Innovation</span> <span>#TeamWork</span>
+                            </div>
+                        </div>
+                        <div class="post-footer">
+                            <a href="https://www.linkedin.com/posts/ricardo-andaluz-sinisterra-038a972ab_fhl2025-microsoftlife-hackathon-activity-7352271624437407744-Sm_s" 
+                               target="_blank" 
+                               class="view-on-linkedin">
+                                View full post on LinkedIn →
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="block2" class="block">
-            <div class="block-content">
-                <img src="css/images/screenshot-of-projects.png" alt="Repo screenshot" class="block-image">
-                <div class="block-text">
-                    <p class="block-title">GitLab Repositories</p>
-                    <p>Throughout the years, I have worked on a variety of projects showcased in my GitLab repositories, 
-                        ranging from DevOps to software development. One notable project is Wavdio, a music player application that 
-                        allows users to upload and play music through a browser-based GUI. This project involved Docker, Python, CSS, 
-                        and Jinja, and was later deployed using Kubernetes for scalability and microservices architecture.
-                    </p>
-                    <p>
-                        Additionally, I have completed several academic and practical projects in algorithms and data structures, including complex assignments 
-                        and coding challenges in Java, which strengthened my understanding of computational theory and software design. 
-                        Another important repository is the Own Website project, where I developed and deployed this personal website using HTML, CSS, JavaScript and a pipeline. 
-                        This site is hosted on Azure DNS services, serving as a portfolio for my work.
-                    </p>
-                    <p>
-                        These projects, along with others involving scripting, automation, containerization and deployment, 
-                        reflect my progression in DevOps practices, cloud environments, and full-stack development.
-                    </p>
-                    <p>
-                        You can find the link for my projects <a href="https://gitlab.comp.dkit.ie/users/D00262961/projects">here</a>.
-                    </p>
-                </div>
-            </div>
+      <div id="block2" class="block">
+        <div class="block-content">
+          <img
+            src="css/images/screenshot-of-projects.png"
+            alt="Repo screenshot"
+            class="block-image"
+          />
+          <div class="block-text">
+            <p class="block-title">GitLab Repositories</p>
+            <p>
+              Throughout the years, I have worked on a variety of projects
+              showcased in my GitLab repositories, ranging from DevOps to
+              software development. One notable project is Wavdio, a music
+              player application that allows users to upload and play music
+              through a browser-based GUI. This project involved Docker, Python,
+              CSS, and Jinja, and was later deployed using Kubernetes for
+              scalability and microservices architecture.
+            </p>
+            <p>
+              Additionally, I have completed several academic and practical
+              projects in algorithms and data structures, including complex
+              assignments and coding challenges in Java, which strengthened my
+              understanding of computational theory and software design. Another
+              important repository is the Own Website project, where I developed
+              and deployed this personal website using HTML, CSS, JavaScript and
+              a pipeline. This site is hosted on Azure DNS services, serving as
+              a portfolio for my work.
+            </p>
+            <p>
+              These projects, along with others involving scripting, automation,
+              containerization and deployment, reflect my progression in DevOps
+              practices, cloud environments, and full-stack development.
+            </p>
+            <p>
+              You can find the link for my projects
+              <a href="https://gitlab.comp.dkit.ie/users/D00262961/projects"
+                >here</a
+              >.
+            </p>
+          </div>
         </div>
-        <div id="block3" class="block">
-            <div class="block-content">
-                <img src="css/images/screenshot-of-cv.png" alt="Repo screenshot" class="block-image">
-                <div class="block-text">
-                    <p class="block-title">Curriculum</p>
-                    <p>In this section you can find my CV for a comprehensive overview of my academic achievements, technical skills, and professional experience. 
-                        I am currently pursuing a BSc (Hons) in Computing Systems and Operations, with a focus on Software Development and DevOps. 
-                        My expertise includes cloud services such as Azure, as well as containerization and orchestration technologies like Kubernetes and Docker. 
-                        I am proficient in programming languages like Python, HTML, and CSS, with additional experience in Bash, SQL, and JavaScript.
-                    </p>
-                    <p>
-                        Alongside my academic work, I have gained practical experience through roles such as a barista at Starbucks, 
-                        where I developed communication and teamwork skills, and a sandwich artist at Subway, where I managed high-pressure environments and trained new staff. 
-                        I am seeking an internship in the tech industry to further enhance my cloud computing and DevOps skills in preparation for my graduation in 2026.
-                    </p>
-                    <p>
-                        You can find the complete CV <a href="./ricardo-andaluz-cv.html">here</a>.
-                    </p>
-                </div>
-            </div>
+      </div>
+      <div id="block3" class="block">
+        <div class="block-content">
+          <img
+            src="css/images/screenshot-of-cv.png"
+            alt="Repo screenshot"
+            class="block-image"
+          />
+          <div class="block-text">
+            <p class="block-title">Curriculum</p>
+            <p>
+              In this section you can find my CV for a comprehensive overview of
+              my academic achievements, technical skills, and professional
+              experience. I am currently pursuing a BSc (Hons) in Computing
+              Systems and Operations, with a focus on Software Development and
+              DevOps. My expertise includes cloud services such as Azure, as
+              well as containerization and orchestration technologies like
+              Kubernetes and Docker. I am proficient in programming languages
+              like Python, HTML, and CSS, with additional experience in Bash,
+              SQL, and JavaScript.
+            </p>
+            <p>
+              Alongside my academic work, I have gained practical experience
+              through roles such as a barista at Starbucks, where I developed
+              communication and teamwork skills, and a sandwich artist at
+              Subway, where I managed high-pressure environments and trained new
+              staff. I am seeking an internship in the tech industry to further
+              enhance my cloud computing and DevOps skills in preparation for my
+              graduation in 2026.
+            </p>
+            <p>
+              You can find the complete CV
+              <a href="./ricardo-andaluz-cv.html">here</a>.
+            </p>
+          </div>
         </div>
+      </div>
     </div>
     <script src="./js/scripts.js"></script>
-</body>
+  </body>
 </html>
