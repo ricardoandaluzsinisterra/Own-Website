@@ -1,30 +1,98 @@
 stages:
-  - sync
+  - validate
   - deploy
 
 variables:
   AZURE_STATIC_WEB_APPS_API_TOKEN: $AZURE_STATIC_WEB_APPS_API_TOKEN
 
-sync:
-  stage: sync
-  image: alpine/git:latest
+# Validate and verify files before deployment
+validate:
+  stage: validate
+  image: alpine:latest
   script:
-    - echo "Synchronizing repository..."
-    - git fetch origin
-    - git status
-    - echo "Repository is up to date"
+    - echo "=== Validating deployment files ==="
+    - echo "Current working directory:"
+    - pwd
+    - echo ""
+    - echo "Repository structure:"
+    - find . -type f -name "*.html" -o -name "*.css" -o -name "*.js" | head -20
+    - echo ""
+    - echo "Public directory contents:"
+    - ls -la public/ || echo "Public directory not found"
+    - echo ""
+    - echo "CSS file verification:"
+    - if [ -f "public/css/styles.css" ]; then
+        echo "✓ styles.css found"
+        echo "File size: $(du -h public/css/styles.css)"
+        echo "Line count: $(wc -l < public/css/styles.css)"
+        echo "First 10 lines:"
+        head -10 public/css/styles.css
+        echo "Last 10 lines:"
+        tail -10 public/css/styles.css
+      else
+        echo "✗ styles.css NOT found"
+        exit 1
+      fi
+    - echo ""
+    - echo "HTML files verification:"
+    - for file in public/*.html; do
+        if [ -f "$file" ]; then
+          echo "✓ Found: $file ($(wc -l < "$file") lines)"
+        fi
+      done
+  artifacts:
+    reports:
+      junit: validate-results.xml
+    paths:
+      - public/
+    expire_in: 1 hour
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
       when: always
 
+# Deploy to Azure Static Web Apps
 deploy:
   stage: deploy
-  image: node:18
+  image: node:18-alpine
+  dependencies:
+    - validate
+  before_script:
+    - echo "=== Pre-deployment checks ==="
+    - echo "Node version: $(node --version)"
+    - echo "NPM version: $(npm --version)"
+    - echo "Deployment directory contents:"
+    - ls -la public/
+    - echo "CSS file status before deployment:"
+    - if [ -f "public/css/styles.css" ]; then
+        echo "✓ CSS file present ($(wc -l < public/css/styles.css) lines)"
+      else
+        echo "✗ CSS file missing!"
+        exit 1
+      fi
   script: 
-    - echo "Installing Azure Static Web Apps CLI..."
-    - sudo npm install -g @azure/static-web-apps-cli --unsafe-perm
-    - echo "Deploying to Azure Static Web Apps..."
-    - sudo npx swa deploy ./public --env production --deployment-token $AZURE_STATIC_WEB_APPS_API_TOKEN
+    - echo "=== Installing Azure Static Web Apps CLI ==="
+    - npm install -g @azure/static-web-apps-cli
+    - echo ""
+    - echo "=== Deploying to Azure Static Web Apps ==="
+    - echo "Deployment source: ./public"
+    - echo "Environment: production"
+    - npx swa deploy ./public --env production --deployment-token $AZURE_STATIC_WEB_APPS_API_TOKEN --verbose
+    - echo ""
+    - echo "=== Post-deployment verification ==="
+    - echo "Deployment completed at: $(date)"
+  after_script:
+    - echo "=== Deployment Summary ==="
+    - echo "Pipeline ID: $CI_PIPELINE_ID"
+    - echo "Commit SHA: $CI_COMMIT_SHA"
+    - echo "Commit message: $CI_COMMIT_MESSAGE"
+    - if [ -f "public/css/styles.css" ]; then
+        echo "Final CSS file verification: $(wc -l < public/css/styles.css) lines"
+      fi
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
       when: always
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - api_failure
