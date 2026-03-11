@@ -1,0 +1,49 @@
+name: Deploy to Azure Static Web Apps
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate deployment files
+        run: |
+          find . -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" \) | head -20
+          ls -la public/
+          if [ -f "public/css/styles.css" ]; then
+            echo "✓ styles.css found ($(wc -l < public/css/styles.css) lines)"
+          else
+            echo "✗ styles.css NOT found"; exit 1
+          fi
+          for file in public/*.html; do
+            [ -f "$file" ] && echo "✓ Found: $file ($(wc -l < "$file") lines)"
+          done
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pre-deployment checks
+        run: |
+          node --version && npm --version
+          ls -la public/
+          [ -f "public/css/styles.css" ] && echo "✓ CSS present" || { echo "✗ CSS missing"; exit 1; }
+
+      - name: Deploy to Azure Static Web Apps
+        run: |
+          npm install @azure/static-web-apps-cli
+          npx swa deploy ./public --env production \
+            --deployment-token ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }} \
+            --verbose
+
+      - name: Deployment summary
+        run: |
+          echo "Run ID: ${{ github.run_id }}"
+          echo "Commit SHA: ${{ github.sha }}"
+          wc -l < public/css/styles.css && echo "lines in styles.css"
