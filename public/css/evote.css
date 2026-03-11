@@ -1,23 +1,12 @@
 /* E-Vote detail page styles */
 
-/* Clickable block link wrapper */
-a.block-link {
-    display: block;
-    text-decoration: none;
-    color: inherit;
-    width: 95%;
-    max-width: 1200px;
-    margin: 20px 0;
-}
-
-a.block-link .block {
-    width: 100%;
-    margin: 0;
-    transition: box-shadow 0.25s ease, transform 0.2s ease;
+/* Clickable block - uses onclick, no anchor wrapper */
+.block-clickable {
     cursor: pointer;
+    transition: box-shadow 0.25s ease, transform 0.2s ease;
 }
 
-a.block-link .block:hover {
+.block-clickable:hover {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
     transform: translateY(-2px);
 }
@@ -123,10 +112,6 @@ a.block-link .block:hover {
 
     .evote-pipeline-arrow {
         transform: rotate(90deg);
-    }
-
-    a.block-link {
-        width: 90%;
     }
 }
 

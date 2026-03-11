@@ -9,11 +9,11 @@
       href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <title>E&#8209;Vote &mdash; Ricardo Andaluz</title>
+    <title>E-Vote | Ricardo Andaluz</title>
   </head>
   <body>
     <div class="header">
-      <h1>E&#8209;Vote</h1>
+      <h1>E-Vote</h1>
       <div id="links">
         <a href="./index.html">&larr; Back to Portfolio</a>
         <span class="separator"></span>
@@ -31,7 +31,7 @@
           <div class="block-text" style="width:100%">
             <p class="block-title">Project Overview</p>
             <p>
-              E&#8209;Vote is a secure online voting platform designed for small to medium organisations that need remote elections with strong guarantees of voter anonymity, integrity, and verifiable audit trails. The platform is built to production&#8209;grade standards, demonstrating end&#8209;to&#8209;end ownership of architecture, security, DevOps automation, and operational observability.
+              E-Vote is a secure online voting platform designed for small to medium organisations that need remote elections with strong guarantees of voter anonymity, integrity, and verifiable audit trails. The platform is built to production-grade standards, demonstrating end-to-end ownership of architecture, security, DevOps automation, and operational observability.
             </p>
             <p>
               The system is decomposed into three independent Python FastAPI microservices (auth, voting, audit), a React frontend, Apache Kafka for event streaming between services, and a Kong API Gateway as the single ingress point. Each service owns its own PostgreSQL database, enforcing strict data isolation at the service boundary.
@@ -50,13 +50,13 @@
           <div class="block-text" style="width:100%">
             <p class="block-title">Security Design</p>
             <p>
-              Security is a first&#8209;class design constraint rather than an afterthought. All authentication flows use JWT tokens with a signing key stored exclusively as a Kubernetes Secret, never in source code or Docker images. Vote payloads are signed with a separate <code>VOTE_SIGNING_KEY</code> to guarantee tamper&#8209;evidence at the ballot level.
+              Security is a first-class design constraint rather than an afterthought. All authentication flows use JWT tokens with a signing key stored exclusively as a Kubernetes Secret, never in source code or Docker images. Vote payloads are signed with a separate <code>VOTE_SIGNING_KEY</code> to guarantee tamper-evidence at the ballot level.
             </p>
             <p>
-              Kong API Gateway centralises cross&#8209;cutting security concerns: JWT validation, CORS enforcement, and rate limiting (100 req/min) are applied at the gateway layer. After Kong was introduced, duplicate JWT/CORS handling was explicitly removed from the FastAPI services (KAN&#8209;64) to eliminate a false security model where direct&#8209;to&#8209;service requests could bypass the gateway entirely.
+              Kong API Gateway centralises cross-cutting security concerns: JWT validation, CORS enforcement, and rate limiting (100 req/min) are applied at the gateway layer. After Kong was introduced, duplicate JWT/CORS handling was explicitly removed from the FastAPI services (KAN-64) to eliminate a false security model where direct-to-service requests could bypass the gateway entirely.
             </p>
             <p>
-              Kubernetes <code>NetworkPolicy</code> resources lock backend services from direct external access, ensuring all traffic flows through Kong. A Trivy container image vulnerability scan is included as a CI quality gate, blocking merges if high&#8209;severity CVEs are detected. A secrets exposure incident during Kompose conversion was mitigated by rotating all credentials and purging the file from git history; the pattern is now: GitHub Actions Secrets &rarr; pipeline creates K8s Secret &rarr; pods consume via <code>secretRef</code>.
+              Kubernetes <code>NetworkPolicy</code> resources lock backend services from direct external access, ensuring all traffic flows through Kong. A Trivy container image vulnerability scan is included as a CI quality gate, blocking merges if high-severity CVEs are detected. The enforced secrets pattern is: GitHub Actions Secrets &rarr; pipeline creates K8s Secret &rarr; pods consume via <code>secretRef</code>.
             </p>
           </div>
         </div>
@@ -68,10 +68,10 @@
           <div class="block-text" style="width:100%">
             <p class="block-title">Microservices Architecture</p>
             <p>
-              The system follows a bounded&#8209;context model where each service owns its data and communicates asynchronously. The auth service handles voter registration and JWT issuance. The voting service records ballots and publishes events to Kafka. The audit service consumes those events and maintains an immutable audit log, providing a verifiable trail without coupling directly to the voting service.
+              The system follows a bounded-context model where each service owns its data and communicates asynchronously. The auth service handles voter registration and JWT issuance. The voting service records ballots and publishes events to Kafka. The audit service consumes those events and maintains an immutable audit log, providing a verifiable trail without coupling directly to the voting service.
             </p>
             <p>
-              Kafka decouples the voting and audit services, providing durability: if the audit service is killed mid&#8209;vote, Kafka buffers the events and replays them on restart. This was validated as a fault tolerance test during Sprint 5. Each service has a minimum of three unit tests (vote cast, token generation, audit insert) enforced as a CI quality gate.
+              Kafka decouples the voting and audit services, providing durability: if the audit service is killed mid-vote, Kafka buffers the events and replays them on restart. Each service has a minimum of three unit tests (vote cast, token generation, audit insert) enforced as a CI quality gate.
             </p>
             <div class="evote-tech-grid">
               <div class="evote-tech-item"><strong>Auth Service</strong><br/>FastAPI &bull; JWT &bull; PostgreSQL</div>
@@ -89,15 +89,15 @@
       <div class="block">
         <div class="block-content">
           <div class="block-text" style="width:100%">
-            <p class="block-title">DevOps &amp; GitOps Pipeline</p>
+            <p class="block-title">DevOps and GitOps Pipeline</p>
             <p>
-              Infrastructure is fully automated. Ansible playbooks provision cloud VMs with <code>common</code>, <code>docker</code>, <code>github-runner</code>, and <code>k3s</code> roles. Three self&#8209;hosted GitHub Actions runners (build&#8209;env, test&#8209;env, stage&#8209;env) are registered with custom labels and routed to the correct pipeline jobs. No secrets are baked into images; all are injected at runtime via GitHub Actions Secrets into Kubernetes Secrets.
+              Infrastructure is fully automated. Ansible playbooks provision cloud VMs with <code>common</code>, <code>docker</code>, <code>github-runner</code>, and <code>k3s</code> roles. Three self-hosted GitHub Actions runners (build-env, test-env, stage-env) are registered with custom labels and routed to the correct pipeline jobs. No secrets are baked into images; all are injected at runtime via GitHub Actions Secrets into Kubernetes Secrets.
             </p>
             <p>
-              The deployment model is GitOps: on a successful CI run, the pipeline pushes tagged images to GHCR and commits updated image tags to a separate GitOps repository. ArgoCD with auto&#8209;sync, prune, and self&#8209;heal watches that repo and reconciles the cluster state automatically. This eliminates SSH&#8209;based deploys, gives free drift detection, and produces a full deployment audit trail in git.
+              The deployment model is GitOps: on a successful CI run, the pipeline pushes tagged images to GHCR and commits updated image tags to a separate GitOps repository. ArgoCD with auto-sync, prune, and self-heal watches that repo and reconciles the cluster state automatically. This eliminates SSH-based deploys, provides drift detection, and produces a full deployment audit trail in git.
             </p>
             <p>
-              Kustomize overlays (<code>overlays/stage</code> and <code>overlays/prod</code>) provide per&#8209;environment image tags and replica counts, keeping base manifests DRY. The CI pipeline includes a quality gate: any failing test or Trivy finding blocks the merge to <code>main</code>.
+              Kustomize overlays (<code>overlays/stage</code> and <code>overlays/prod</code>) provide per-environment image tags and replica counts, keeping base manifests DRY. The CI pipeline includes a quality gate: any failing test or Trivy finding blocks the merge to <code>main</code>.
             </p>
             <div class="evote-pipeline">
               <div class="evote-pipeline-step">Push to <code>main</code></div>
@@ -110,7 +110,7 @@
               <div class="evote-pipeline-arrow">&rarr;</div>
               <div class="evote-pipeline-step">Commit tags to GitOps repo</div>
               <div class="evote-pipeline-arrow">&rarr;</div>
-              <div class="evote-pipeline-step">ArgoCD auto&#8209;sync</div>
+              <div class="evote-pipeline-step">ArgoCD auto-sync</div>
             </div>
           </div>
         </div>
@@ -122,16 +122,16 @@
           <div class="block-text" style="width:100%">
             <p class="block-title">Key Design Decisions</p>
             <p>
-              <strong>Kong over NGINX:</strong> The original design used an NGINX api&#8209;gateway deployment as the ingress point. During Sprint 5, this was replaced with Kong Ingress Controller. Kong was selected because it provides JWT validation, CORS, and rate limiting as declarative plugins on Kubernetes CRDs, removing the need to duplicate those concerns in each FastAPI service. The NGINX deployment was explicitly decommissioned after Kong reached parity.
+              <strong>Kong over NGINX:</strong> The original design used an NGINX api-gateway deployment as the ingress point. This was replaced with Kong Ingress Controller because Kong provides JWT validation, CORS, and rate limiting as declarative plugins on Kubernetes CRDs, removing the need to duplicate those concerns in each FastAPI service. The NGINX deployment was explicitly decommissioned after Kong reached parity.
             </p>
             <p>
-              <strong>GitOps over SSH deploy:</strong> The initial delivery plan used SSH&#8209;based <code>docker compose</code> deployment. This was replaced with a full GitOps stack (ArgoCD + k3s + Kustomize) during Sprint 3. Although this added unplanned work, it eliminated SSH key management in CI, provided self&#8209;healing, drift detection, and a git&#8209;native deployment audit trail.
+              <strong>GitOps over SSH deploy:</strong> The initial delivery plan used SSH-based <code>docker compose</code> deployment. This was replaced with a full GitOps stack (ArgoCD + k3s + Kustomize) during Sprint 3. Although this added unplanned work, it eliminated SSH key management in CI, provided self-healing, drift detection, and a git-native deployment audit trail.
             </p>
             <p>
-              <strong>Database&#8209;per&#8209;service:</strong> Each microservice owns a dedicated PostgreSQL instance. This enforces bounded contexts, prevents tight coupling at the data layer, and allows each service to evolve its schema independently. Kafka is the only cross&#8209;service communication channel.
+              <strong>Database-per-service:</strong> Each microservice owns a dedicated PostgreSQL instance. This enforces bounded contexts, prevents tight coupling at the data layer, and allows each service to evolve its schema independently. Kafka is the only cross-service communication channel.
             </p>
             <p>
-              <strong>Stage 3 multi&#8209;tenancy:</strong> The forward plan provisions one isolated k3s cluster per customer via Terraform (KAN&#8209;61), explicitly rejecting namespace&#8209;based multi&#8209;tenancy to guarantee blast&#8209;radius isolation between customers.
+              <strong>Stage 3 multi-tenancy:</strong> The forward plan provisions one isolated k3s cluster per customer via Terraform (KAN-61), explicitly rejecting namespace-based multi-tenancy to guarantee blast-radius isolation between customers.
             </p>
           </div>
         </div>
@@ -141,12 +141,12 @@
       <div class="block">
         <div class="block-content">
           <div class="block-text" style="width:100%">
-            <p class="block-title">Observability &amp; Resilience</p>
+            <p class="block-title">Observability and Resilience</p>
             <p>
-              Each FastAPI service exposes a Prometheus metrics endpoint via <code>prometheus&#8209;fastapi&#8209;instrumentator</code>. A Grafana dashboard tracks request rate, error rate, and latency per service. SLIs and SLOs are formally defined (e.g. vote latency &lt; 500ms, 99% uptime), and Prometheus Alertmanager fires a service&#8209;down alert when a pod becomes unavailable.
+              Each FastAPI service exposes a Prometheus metrics endpoint via <code>prometheus-fastapi-instrumentator</code>. A Grafana dashboard tracks request rate, error rate, and latency per service. SLIs and SLOs are formally defined (e.g. vote latency under 500ms, 99% uptime), and Prometheus Alertmanager fires a service-down alert when a pod becomes unavailable.
             </p>
             <p>
-              Structured JSON logging is applied across all services using Python <code>logging</code> or <code>loguru</code>, making log aggregation and querying straightforward. Fault tolerance was validated by killing services mid&#8209;flow: Kafka replays buffered events on audit service restart, the gateway returns clean errors when the voting service is down, and Kubernetes restarts pods automatically via liveness probes.
+              Structured JSON logging is applied across all services using Python <code>logging</code> or <code>loguru</code>, making log aggregation and querying straightforward. Fault tolerance was validated by killing services mid-flow: Kafka replays buffered events on audit service restart, the gateway returns clean errors when the voting service is down, and Kubernetes restarts pods automatically via liveness probes.
             </p>
           </div>
         </div>
@@ -156,12 +156,12 @@
       <div class="block">
         <div class="block-content">
           <div class="block-text" style="width:100%">
-            <p class="block-title">Boundaries &amp; Scope</p>
+            <p class="block-title">Boundaries and Scope</p>
             <p>
-              The MVP targets small to medium organisations requiring a self&#8209;hosted, auditable voting system. The platform is not designed for public&#8209;internet elections at scale; it assumes a known voter population registered ahead of the election. Voter anonymity is achieved through the separation between authentication (who voted) and the ballot record (what was voted), which are stored in separate services with separate databases.
+              The MVP targets small to medium organisations requiring a self-hosted, auditable voting system. The platform is not designed for public-internet elections at scale; it assumes a known voter population registered ahead of the election. Voter anonymity is achieved through the separation between authentication (who voted) and the ballot record (what was voted), stored in separate services with separate databases.
             </p>
             <p>
-              Namespace&#8209;based multi&#8209;tenancy is explicitly out of scope. Each customer deployment is an isolated k3s cluster provisioned by Terraform, ensuring no shared kernel namespaces or network paths between tenants. The Stage 3 admin portal (KAN&#8209;62) will expose a company&#8209;only UI to trigger provisioning jobs, abstracting Terraform execution behind an API.
+              Namespace-based multi-tenancy is explicitly out of scope. Each customer deployment is an isolated k3s cluster provisioned by Terraform, ensuring no shared kernel namespaces or network paths between tenants. The Stage 3 admin portal (KAN-62) will expose a company-only UI to trigger provisioning jobs, abstracting Terraform execution behind an API.
             </p>
             <div class="evote-links" style="margin-top:24px">
               <a href="https://github.com/ricardoandaluzsinisterra/E-Vote" target="_blank" class="evote-btn">&#128279; GitHub Repository</a>

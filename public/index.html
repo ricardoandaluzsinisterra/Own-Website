@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/evote.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;700&display=swap"
       rel="stylesheet"
@@ -25,25 +26,28 @@
       </div>
     </div>
     <div class="container">
-      <a href="./evote.html" class="block-link">
-        <div id="block-evote" class="block">
-          <div class="highlighted-ribbon">Highlighted</div>
-          <div class="block-content">
-            <div class="block-text" style="width: 100%">
-              <p class="block-title">E&#8209;Vote &mdash; Secure Online Voting Platform</p>
-              <p>
-                E&#8209;Vote is a production-grade secure online voting platform built for small to medium organisations requiring remote elections with strong guarantees of voter anonymity, integrity, and verifiable audit trails. The platform is architected as a microservices system using Python FastAPI for the backend services, a React frontend, PostgreSQL databases per service, Apache Kafka for event streaming, and a Kong API Gateway as the single entry point for all traffic.
-              </p>
-              <p>
-                The infrastructure is fully automated using Ansible for VM provisioning, Terraform for cloud resource management, and deployed to Kubernetes (k3s) via a GitOps model with ArgoCD and Kustomize. A GitHub Actions CI/CD pipeline builds, tests, and pushes Docker images to GHCR, then triggers ArgoCD to sync the cluster &mdash; ensuring no manual deployments and full audit trails on every release.
-              </p>
-              <p>
-                Security is a first-class concern: JWT authentication, vote signing keys, CORS policies, and all sensitive configuration are managed as Kubernetes Secrets injected at runtime. No secrets are baked into any image. Click to read more about the architecture, security design, and DevOps decisions.
-              </p>
-            </div>
+      <div id="block-evote" class="block block-clickable" onclick="window.location='./evote.html'">
+        <div class="highlighted-ribbon">Highlighted</div>
+        <div class="block-content">
+          <img
+            src="css/images/sc-of-evote.png"
+            alt="E-Vote screenshot"
+            class="block-image"
+          />
+          <div class="block-text">
+            <p class="block-title"><a href="./evote.html">E-Vote: Secure Online Voting Platform</a></p>
+            <p>
+              E-Vote is a production-grade secure online voting platform built for small to medium organisations requiring remote elections with strong guarantees of voter anonymity, integrity, and verifiable audit trails. The platform is architected as a microservices system using Python FastAPI for the backend services, a React frontend, PostgreSQL databases per service, Apache Kafka for event streaming, and a Kong API Gateway as the single entry point for all traffic.
+            </p>
+            <p>
+              The infrastructure is fully automated using Ansible for VM provisioning, Terraform for cloud resource management, and deployed to Kubernetes (k3s) via a GitOps model with ArgoCD and Kustomize. A GitHub Actions CI/CD pipeline builds, tests, and pushes Docker images to GHCR, then triggers ArgoCD to sync the cluster, ensuring no manual deployments and full audit trails on every release.
+            </p>
+            <p>
+              Security is a first-class concern: JWT authentication, vote signing keys, CORS policies, and all sensitive configuration are managed as Kubernetes Secrets injected at runtime. No secrets are baked into any image. Click to read more about the architecture, security design, and DevOps decisions.
+            </p>
           </div>
         </div>
-      </a>
+      </div>
       <div id="block1" class="block">
         <div class="block-content">
           <img
@@ -108,7 +112,7 @@
               <div class="post-content">
                 <p>
                   <strong
-                    >🏆 WE WON! BEST HACK at Microsoft Ireland Intern
+                    >&#127942; WE WON! BEST HACK at Microsoft Ireland Intern
                     FHL!</strong
                   >
                 </p>
