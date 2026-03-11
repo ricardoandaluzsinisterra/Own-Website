@@ -19,14 +19,32 @@
           >LinkedIn</a
         >
         <span class="separator"></span>
-        <a href="https://gitlab.com/D00262961">GitLab</a>
+        <a href="https://github.com/ricardoandaluzsinisterra">GitHub</a>
         <span class="separator"></span>
         <a href="mailto:ricardo@andaluz.uk">ricardo@andaluz.uk</a>
       </div>
     </div>
     <div class="container">
+      <a href="./evote.html" class="block-link">
+        <div id="block-evote" class="block">
+          <div class="highlighted-ribbon">Highlighted</div>
+          <div class="block-content">
+            <div class="block-text" style="width: 100%">
+              <p class="block-title">E&#8209;Vote &mdash; Secure Online Voting Platform</p>
+              <p>
+                E&#8209;Vote is a production-grade secure online voting platform built for small to medium organisations requiring remote elections with strong guarantees of voter anonymity, integrity, and verifiable audit trails. The platform is architected as a microservices system using Python FastAPI for the backend services, a React frontend, PostgreSQL databases per service, Apache Kafka for event streaming, and a Kong API Gateway as the single entry point for all traffic.
+              </p>
+              <p>
+                The infrastructure is fully automated using Ansible for VM provisioning, Terraform for cloud resource management, and deployed to Kubernetes (k3s) via a GitOps model with ArgoCD and Kustomize. A GitHub Actions CI/CD pipeline builds, tests, and pushes Docker images to GHCR, then triggers ArgoCD to sync the cluster &mdash; ensuring no manual deployments and full audit trails on every release.
+              </p>
+              <p>
+                Security is a first-class concern: JWT authentication, vote signing keys, CORS policies, and all sensitive configuration are managed as Kubernetes Secrets injected at runtime. No secrets are baked into any image. Click to read more about the architecture, security design, and DevOps decisions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </a>
       <div id="block1" class="block">
-        <div class="highlighted-ribbon">Highlighted</div>
         <div class="block-content">
           <img
             src="css/images/screenshot-of-repo.png"
@@ -117,7 +135,7 @@
                   target="_blank"
                   class="view-on-linkedin"
                 >
-                  View full post on LinkedIn →
+                  View full post on LinkedIn &rarr;
                 </a>
               </div>
             </div>
@@ -132,10 +150,10 @@
             class="block-image"
           />
           <div class="block-text">
-            <p class="block-title">GitLab Repositories</p>
+            <p class="block-title">GitHub Repositories</p>
             <p>
               Throughout the years, I have worked on a variety of projects
-              showcased in my GitLab repositories, ranging from DevOps to
+              showcased in my GitHub repositories, ranging from DevOps to
               software development. One notable project is Wavdio, a music
               player application that allows users to upload and play music
               through a browser-based GUI. This project involved Docker, Python,
@@ -159,7 +177,7 @@
             </p>
             <p>
               You can find the link for my projects
-              <a href="https://gitlab.comp.dkit.ie/users/D00262961/projects"
+              <a href="https://github.com/ricardoandaluzsinisterra?tab=repositories"
                 >here</a
               >.
             </p>
