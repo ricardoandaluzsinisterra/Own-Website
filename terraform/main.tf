@@ -28,3 +28,9 @@ resource "azurerm_static_web_app" "ra_website" {
   tags = {}
 }
 
+resource "azurerm_static_web_app_custom_domain" "ra_domain" {
+  static_web_app_id = azurerm_static_web_app.ra_website.id
+  domain_name       = "ricardoandaluz.com"
+  validation_type   = "dns-txt-token"
+}
+
